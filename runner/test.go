@@ -1,10 +1,7 @@
 package main
 
-import (
-	"github.com/cepratek/golang-prep/searching"
-)
+import "github.com/cepratek/golang-prep/queue"
 
 func main() {
-	searching.PlayMedian2SortedArrays()
+	queue.PlayRotOranges()
 }
-

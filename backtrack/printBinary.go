@@ -2,8 +2,8 @@ package backtrack
 
 import "fmt"
 
-func PrintBinary(len int) {
-	printBinaryHelper(len, "")
+func PrintBinary() {
+	printBinaryHelper(3, "")
 }
 
 func printBinaryHelper(length int, temp string) {
