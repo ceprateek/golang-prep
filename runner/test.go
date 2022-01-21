@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/cepratek/golang-prep/greedy"
+	"github.com/cepratek/golang-prep/recursion"
 )
 
 func main() {
-	greedy.PlayPoliceThief()
+	recursion.PlayRobotPaths()
 }
