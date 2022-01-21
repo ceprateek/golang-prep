@@ -1,7 +1,9 @@
 package main
 
-import "github.com/cepratek/golang-prep/queue"
+import (
+	"github.com/cepratek/golang-prep/greedy"
+)
 
 func main() {
-	queue.PlayRotOranges()
+	greedy.PlayJumper()
 }
