@@ -54,5 +54,5 @@ func Run() {
 	g.AddEdge(2, 3)
 	g.AddEdge(3, 3)
 
-	g.PrintDFS(2)
+	g.PrintCompleteDfs()
 }

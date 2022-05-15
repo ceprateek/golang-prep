@@ -1,17 +1,16 @@
 package searching
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func PlayMedian2SortedArrays() {
-	ar1 := []int{2, 3, 5, 8}
-	ar2 := []int{10, 12, 14, 16, 18, 20}
+	ar1 := []int{2, 3, 5, 8, 10, 14, 18}
+	ar2 := []int{6, 8, 9, 11, 12, 14, 16}
+
 	if len(ar1) == len(ar2) {
 		fmt.Printf("same length median1: %d\n", findMedianSameLengthEfficient(ar1, ar2))
-		fmt.Printf("same length median2: %d\n", findMedianSameLength(ar1, ar2))
-	} else {
-		fmt.Printf("diff length median: %d", findMedianDifferentLength(ar1, ar2))
 	}
-
 }
 
 func findMedianSameLength(in1, in2 []int) int {

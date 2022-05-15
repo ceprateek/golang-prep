@@ -28,51 +28,51 @@ func (t *Tree) Insert(val int) {
 func (n *TreeNode) Insert(v int) {
 	if n == nil {
 		return
-	} else {
-		if v < n.Value {
-			if n.Left == nil {
-				n.Left = &TreeNode{
-					Left:  nil,
-					Value: v,
-					Right: nil,
-				}
-			} else {
-				n.Left.Insert(v)
+	}
+	if v < n.Value {
+		if n.Left == nil {
+			n.Left = &TreeNode{
+				Left:  nil,
+				Value: v,
+				Right: nil,
 			}
 		} else {
-			if n.Right == nil {
-				n.Right = &TreeNode{
-					Left:  nil,
-					Value: v,
-					Right: nil,
-				}
-			} else {
-				n.Right.Insert(v)
+			n.Left.Insert(v)
+		}
+	} else {
+		if n.Right == nil {
+			n.Right = &TreeNode{
+				Left:  nil,
+				Value: v,
+				Right: nil,
 			}
+		} else {
+			n.Right.Insert(v)
 		}
 	}
+
 }
 
-func (t *Tree) PrintLevelOrder(result chan int) {
+func (t *Tree) PrintLevelOrder() {
 	heightOfTree := t.root.Height()
 	fmt.Println(fmt.Sprintf("height: %d", heightOfTree))
 	for i := 1; i <= heightOfTree; i++ {
-		t.root.PrintLevel(i, result)
+		level := make([]int, 0)
+		t.root.PrintLevel(i,&level)
+		fmt.Println(level)
 	}
-	close(result)
 }
 
-func (root *TreeNode) PrintLevel(level int, result chan int) {
+func (root *TreeNode) PrintLevel(level int, result *[]int) {
 	if root == nil {
 		return
 	}
 	if level == 1 {
-		result <- root.Value
+		*result = append(*result, root.Value)
 	} else if level > 1 {
 		root.Left.PrintLevel(level-1, result)
 		root.Right.PrintLevel(level-1, result)
 	}
-
 }
 
 func (root *TreeNode) Height() int {
@@ -81,9 +81,12 @@ func (root *TreeNode) Height() int {
 	}
 	leftHeight := root.Left.Height()
 	rightHeight := root.Right.Height()
-	if leftHeight > rightHeight {
-		return leftHeight + 1
-	} else {
-		return rightHeight + 1
+	return max(leftHeight, rightHeight)+1
+}
+
+func max(a, b int) int{
+	if a>b{
+		return a
 	}
+	return b
 }

@@ -3,7 +3,7 @@ package algorithms
 import "fmt"
 
 func PlayKMP() {
-	KMPSearch("CAB", "ABCABAABCABAC")
+	KMPSearch("AAACAAAA", "ABCABAABCABAC")
 }
 
 func KMPSearch(pat string, txt string) {

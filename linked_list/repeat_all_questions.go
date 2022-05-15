@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-type LinkedList struct {
+type LinkedList1 struct {
 	head *node
 }
 
@@ -14,14 +14,14 @@ type node struct {
 	data interface{}
 }
 
-func (l *LinkedList) IsEmpty() bool {
+func (l *LinkedList1) IsEmpty() bool {
 	if l.head == nil {
 		return true
 	}
 	return false
 }
 
-func (l *LinkedList) CreateLinkedList() {
+func (l *LinkedList1) CreateLinkedList() {
 	previous := l.head
 	for i := 0; i < 10; i++ {
 		node := node{
@@ -37,7 +37,7 @@ func (l *LinkedList) CreateLinkedList() {
 	}
 }
 
-func (l *LinkedList) Display() {
+func (l *LinkedList1) Display() {
 	itr := l.head
 	var result string
 	for itr != nil {
@@ -48,7 +48,7 @@ func (l *LinkedList) Display() {
 	fmt.Println(result)
 }
 
-func (l *LinkedList) GetMiddleLinkedList() interface{} {
+func (l *LinkedList1) GetMiddleLinkedList() interface{} {
 	slow := l.head
 	fast := l.head
 	for fast != nil {
@@ -64,7 +64,7 @@ func (l *LinkedList) GetMiddleLinkedList() interface{} {
 //head->b->c->d
 //itr->b->c->d
 
-func (l *LinkedList) Reverse() {
+func (l *LinkedList1) Reverse() {
 	if l.head == nil || l.head.next == nil{
 		return
 	}

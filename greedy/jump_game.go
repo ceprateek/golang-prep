@@ -1,41 +1,39 @@
 package greedy
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
-/*
-https://leetcode.com/problems/jump-game/
-
-Input: nums = [2,3,1,1,4]
-true
-Input: nums = [3,2,1,0,4]
-false
-
-note: this is not a greedy solution
-however a solution which is exploring everything.
-I am leaving greedy as a TODO
-
-*/
-
-func PlayJumper()  {
-	//in := []int{2,3,1,1,4}
-	in := []int{3,2,1,0,4}
-	fmt.Println(canJump(in))
+func PlayJumpGame() {
+	nums := []int{1, 2, 3}
+	fmt.Println(jump(nums))
 }
 
-func canJump(nums []int) bool {
-	return canJumpHelper(nums, 0)
-}
-
-func canJumpHelper(nums []int, current int)bool{
-	if current == len(nums)-1{
-		return true
+func jump(nums []int) int {
+	if len(nums) <= 1 {
+		return 0
 	}
-	for i:=1;i<=nums[current];i++{
-		if (current+i)<len(nums){
-			if canJumpHelper(nums, current+i){
-				return true
-			}
+
+	dp := make([]int, len(nums))
+	for i := len(nums) - 2; i >= 0; i-- {
+		maxJump := nums[i]
+		if maxJump+i >= len(nums)-1 {
+			dp[i] = 1
+			continue
 		}
+		minJumps := math.MaxInt32
+		for j := 1; j <= maxJump; j++ {
+			minJumps = min(minJumps, dp[i+j])
+		}
+		dp[i] = minJumps+1
 	}
-	return false
+	return dp[0]
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }

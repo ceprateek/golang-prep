@@ -1,49 +1,70 @@
 package lru
 
-import "container/list"
+import (
+	"container/list"
+	"fmt"
+)
+
+type Cache struct {
+	capacity int
+	list     *list.List
+	elements map[string]*list.Element
+}
 
 type KeyPair struct {
-	key   int
-	value int
+	key   string
+	value string
 }
 
-type LRUCache struct {
-	capacity int                   //defines a cache object of the specified capacity.
-	list     *list.List            //DoublyLinkedList for backing the cache value.
-	elements map[int]*list.Element //Map to store list pointer of cache mapped to key
-}
-
-func (cache *LRUCache) Get(key int) int {
-	if node, ok := cache.elements[key]; ok {
-		value := node.Value.(*list.Element).Value.(KeyPair).value
-		cache.list.MoveToFront(node)
-		return value
+func New(capacity int) *Cache {
+	l := &Cache{
+		capacity: capacity,
+		list:     new(list.List),
+		elements: make(map[string]*list.Element, capacity),
 	}
-	return -1
+	return l
+}
+func (c *Cache) Get(key string) (string, error) {
+	if val, ok := c.elements[key]; ok {
+		c.list.MoveToFront(val)
+		return val.Value.(*list.Element).Value.(*KeyPair).value, nil
+	}
+	return "", fmt.Errorf("not found")
 }
 
-//Put: Inserts the key,value pair in LRUCache.
-//If list capacity is full, entry at the last index of the list is deleted before insertion.
-func (cache *LRUCache) Put(key int, value int) {
-	if node, ok := cache.elements[key]; ok {
-		cache.list.MoveToFront(node)
-		node.Value.(*list.Element).Value = KeyPair{key: key, value: value}
-	} else {
-		if cache.list.Len() == cache.capacity {
-			idx := cache.list.Back().Value.(*list.Element).Value.(KeyPair).key
-			delete(cache.elements, idx)
-			cache.list.Remove(cache.list.Back())
-		}
+func (c *Cache) Put(key, value string) {
+	if node, ok := c.elements[key]; ok {
+		c.list.MoveToFront(node)
+		node.Value.(*list.Element).Value.(*KeyPair).value = value
+		return
+	} else if c.list.Len() == c.capacity {
+		key := c.list.Back().Value.(*list.Element).Value.(*KeyPair).key
+		delete(c.elements, key)
+		c.list.Remove(c.list.Back())
 	}
-
-	node := &list.Element{
-		Value: KeyPair{
-			key:   key,
-			value: value,
-		},
-	}
-
-	pointer := cache.list.PushFront(node)
-	cache.elements[key] = pointer
+	node := &list.Element{Value: &KeyPair{
+		key:   key,
+		value: value,
+	}}
+	pointer := c.list.PushFront(node)
+	c.elements[key] = pointer
 }
 
+func (cache *Cache) Print() {
+	first := cache.list.Front()
+	for first != nil {
+		fmt.Printf("%s: %s\n", first.Value.(*list.Element).Value.(*KeyPair).key, first.Value.(*list.Element).Value.(*KeyPair).value)
+		first = first.Next()
+	}
+}
+
+func PlayCache() {
+	c := New(10)
+	c.Put("1", "a")
+	c.Put("2", "b")
+	c.Put("3", "c")
+	c.Put("4", "d")
+	c.Get("1")
+	c.Put("2", "z")
+	c.Print()
+}

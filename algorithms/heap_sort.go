@@ -65,7 +65,6 @@ func heapifyMin(in *[]int, root int, len int) {
 	if lowest != root {
 		(*in)[lowest], (*in)[root] = (*in)[root], (*in)[lowest]
 		heapifyMin(in, lowest, len)
-
 	}
 }
 

@@ -4,17 +4,21 @@ import "fmt"
 
 func uniquePaths(m int, n int) int {
 	routes := 0
-	var paths []*string
+	var paths []string
 	var s string
-	uniquePathHelper(0, 0, m, n, &routes, paths, &s)
-	fmt.Println(paths)
+	uniquePathHelper(0, 0, m, n, &routes, &paths, &s)
+	for _, path := range paths{
+		fmt.Println(path)
+	}
+
 	return routes
 }
 
-func uniquePathHelper(y, x, m, n int, r *int, paths []*string, pathsofar *string) {
+func uniquePathHelper(y, x, m, n int, r *int, paths *[]string, pathsofar *string) {
 	if y == m-1 && x == n-1 {
 		*r++
-		paths = append(paths, pathsofar)
+		temp := *pathsofar
+		*paths = append(*paths, temp)
 		return
 	}
 	if y >= m || x >= n {
@@ -30,7 +34,7 @@ func PlayRobotPaths() {
 	m := 3
 	n := 7
 	fmt.Println(uniquePaths(m, n))
-	fmt.Println(findFibnocci(10))
+	//fmt.Println(findFibnocci(10))
 }
 
 func findFibnocci(n int) int{

@@ -24,7 +24,7 @@ type ListNode struct {
 
 func mergeKLists(lists []*ListNode) *ListNode {
 	i := 0
-	j := len(lists)-1
+	j := len(lists) - 1
 	for i < j {
 		lists[i] = mergeTwoLists(lists[i], lists[j])
 		j--
@@ -32,21 +32,22 @@ func mergeKLists(lists []*ListNode) *ListNode {
 	return lists[0]
 }
 
+//2->4->6->8
+//1->2->3->4
 func mergeTwoLists(a, b *ListNode) *ListNode {
-	//base case
 	if a == nil {
 		return b
-	} else if b == nil {
+	}
+	if b == nil {
 		return a
 	}
-	//recursion
 	var result *ListNode
 	if a.Val < b.Val {
 		result = a
 		result.Next = mergeTwoLists(a.Next, b)
 	} else {
 		result = b
-		b.Next = mergeTwoLists(a, b.Next)
+		result.Next = mergeTwoLists(a, b.Next)
 	}
 	return result
 }
