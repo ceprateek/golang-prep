@@ -37,9 +37,9 @@ func shortestPathHelper(grid [][]int, visited *[][]bool, k int, current []int, s
 	minSteps := math.MaxInt32
 	for i := 0; i < len(rows); i++ {
 		n := []int{current[0] + rows[i], current[1] + cols[i]}
-		if isSafeToGo(grid,visited, n) {
+		if isSafeToGo(grid, visited, n) {
 			(*visited)[n[0]][n[1]] = true
-			stepsNeeded := shortestPathHelper(grid,visited, k, n, steps+1)
+			stepsNeeded := shortestPathHelper(grid, visited, k, n, steps+1)
 			if stepsNeeded != -1 {
 				minSteps = min(minSteps, stepsNeeded)
 			}
@@ -52,7 +52,8 @@ func shortestPathHelper(grid [][]int, visited *[][]bool, k int, current []int, s
 func isSafeToGo(grid [][]int, v *[][]bool, point []int) bool {
 	m := point[0]
 	n := point[1]
-	if m < len(grid) && n < len(grid[m]) && m >= 0 && n >= 0 && !(*v)[m][n]{
+	fmt.Printf("%d %d\n", m, n)
+	if m < len(grid) && m >= 0 && n >= 0 && n < len(grid[m]) && !(*v)[m][n] {
 		return true
 	}
 	return false
