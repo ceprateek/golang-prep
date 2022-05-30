@@ -31,7 +31,7 @@ func permutateHelper(input string, temp string) {
 			fmt.Println("chosen: " + string(c))
 			//explore
 			tempInput := input
-			input = input[0:i] + input[i+1:]
+			input = input[:i] + input[i+1:]
 			temp = temp + string(c)
 			permutateHelper(input, temp)
 
@@ -43,3 +43,4 @@ func permutateHelper(input string, temp string) {
 		}
 	}
 }
+
