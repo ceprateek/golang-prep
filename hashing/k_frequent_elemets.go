@@ -65,5 +65,27 @@ func numbersKFrequency(input []int, k int) {
 func PlayKFrequency() {
 	in := []int{7, 10, 11, 5, 2, 5, 5, 7, 11, 8, 9}
 	k := 4
-	numbersKFrequency(in, k)
+	//numbersKFrequency(in, k)
+	result := topKFrequent(in, k)
+	fmt.Println(result)
+}
+
+func topKFrequent(nums []int, k int) []int {
+	if len(nums) == k {
+		return nums
+	}
+	cache := make(map[int]int)
+	result := make([]int, 0)
+	for _, num := range nums {
+		if _, ok := cache[num]; ok {
+			cache[num] += 1
+		} else {
+			cache[num] = 1
+			result = append(result, num)
+		}
+	}
+	sort.Slice(result, func(i, j int) bool {
+		return cache[result[i]] > cache[result[j]]
+	})
+	return result[:k]
 }

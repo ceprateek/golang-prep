@@ -1,9 +1,7 @@
 package main
 
-import (
-	"github.com/cepratek/golang-prep/recursion"
-)
+import "github.com/cepratek/golang-prep/hashing"
 
 func main() {
-	recursion.PlayShortestPath()
+	hashing.PlayKFrequency()
 }
