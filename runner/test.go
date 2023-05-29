@@ -1,7 +1,7 @@
 package main
 
-import "github.com/cepratek/golang-prep/hashing"
+import "github.com/cepratek/golang-prep/dfs"
 
 func main() {
-	hashing.PlayKFrequency()
+	dfs.Run()
 }

@@ -13,7 +13,7 @@ func printDiceSumHelper(length, sum, tempSum int, temp []int) {
 		}
 	} else {
 		for i := 1; i <= 6; i++ {
-			tempSum += i;
+			tempSum += i
 			temp = append(temp, i)
 			printDiceSumHelper(length-1, sum, tempSum, temp)
 			tempSum -= i
