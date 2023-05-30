@@ -6,19 +6,23 @@ import (
 
 //https://leetcode.com/problems/lexicographically-smallest-equivalent-string/description/
 
+func addNeighborToGraph(node byte, val byte, graph map[byte][]byte) {
+	graph[node] = append(graph[node], val)
+}
+
 func smallestEquivalentString(s1 string, s2 string, baseStr string) string {
 	graph := make(map[byte][]byte)
 	for i := 0; i < len(s1); i++ {
-		graph[s1[i]] = append(graph[s1[i]], s2[i])
-		graph[s2[i]] = append(graph[s2[1]], s1[i])
+		addNeighborToGraph(s1[i], s2[i], graph)
+		addNeighborToGraph(s2[i], s1[i], graph)
 	}
 
 	visited := make(map[byte]bool)
 	minChar := make(map[byte]byte)
 
-	var dfs1 func(node byte) byte
-	dfs1 = func(node byte) byte {
-		if _, ok := visited(node); ok {
+	var dfs func(node byte) byte
+	dfs = func(node byte) byte {
+		if _, ok := visited[node]; ok {
 			return minChar[node]
 		}
 		visited[node] = true
@@ -32,12 +36,13 @@ func smallestEquivalentString(s1 string, s2 string, baseStr string) string {
 		minChar[node] = min
 		return min
 	}
+	result := make([]byte, len(baseStr))
 	for i := range baseStr {
-		result[i] = dfs1(baseStr[i])
+		result[i] = dfs(baseStr[i])
 	}
 	return string(result)
 }
 
 func PlaySmallestEquivalentString() {
-	fmt.Println(smallestEquivalentString("abc", "cde", "eed"))
+	fmt.Println(smallestEquivalentString("parker", "morris", "parser"))
 }
