@@ -1,7 +1,7 @@
 package main
 
-import "github.com/cepratek/golang-prep/dfs"
+import heap_practice "github.com/cepratek/golang-prep/heapPractice"
 
 func main() {
-	dfs.PlaySmallestEquivalentString()
+	heap_practice.PlayHeap()
 }
