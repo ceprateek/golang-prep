@@ -27,6 +27,7 @@ func smallestEquivalentString(s1 string, s2 string, baseStr string) string {
 		}
 		visited[node] = true
 		min := node
+		minChar[node] = min
 		for _, neighbor := range graph[node] {
 			c := dfs(neighbor)
 			if c < min {
@@ -44,5 +45,5 @@ func smallestEquivalentString(s1 string, s2 string, baseStr string) string {
 }
 
 func PlaySmallestEquivalentString() {
-	fmt.Println(smallestEquivalentString("parker", "morris", "parser"))
+	fmt.Println(smallestEquivalentString("abc", "cde", "eed"))
 }
