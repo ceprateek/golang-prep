@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"github.com/ceprateek/golang-prep/backtrack"
+)
 
 func main() {
-	fmt.Println("hello world")
+	backtrack.RunTestSudokuSolver()
 }
