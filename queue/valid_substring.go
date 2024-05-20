@@ -2,7 +2,8 @@ package queue
 
 import (
 	"fmt"
-	stacks "github.com/cepratek/golang-prep/stack"
+
+	stacks "github.com/ceprateek/golang-prep/stack"
 )
 
 /*
@@ -29,9 +30,9 @@ func findLongestValidSubstring(in string) int {
 		case "(":
 			stack.Push(i)
 		case ")":
-			if stack.IsEmpty(){
+			if stack.IsEmpty() {
 				stack.Clear()
-			}else {
+			} else {
 				idx := stack.Pop().(int)
 				maxLen = max(maxLen, i-idx+1)
 			}
@@ -41,7 +42,7 @@ func findLongestValidSubstring(in string) int {
 		}
 		if string(chars[i]) == "(" {
 
-		}else if string(chars[i]) == ")"{
+		} else if string(chars[i]) == ")" {
 
 		}
 	}
@@ -54,9 +55,9 @@ func PlayFindLongestSubstring() {
 }
 
 func max(a, b int) int {
-	if a>b{
+	if a > b {
 		return a
-	}else {
+	} else {
 		return b
 	}
 }

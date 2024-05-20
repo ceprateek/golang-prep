@@ -1,7 +1,7 @@
 package main
 
-import heap_practice "github.com/cepratek/golang-prep/heapPractice"
+import "fmt"
 
 func main() {
-	heap_practice.PlayHeap()
+	fmt.Println("hello world")
 }
